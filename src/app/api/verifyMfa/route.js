@@ -6,6 +6,13 @@ export async function POST(req) {
     const { username, code } = await req.json();
     const entry = mfaStore.get(username);
 
+    if (!username || !code || !/^\d{6}$/.test(code)) {
+      return new Response(JSON.stringify({ error: 'OTP must be exactly 6 digits.' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     if (!entry) {
       return new Response(JSON.stringify({ error: 'No MFA session!' }), {
         status: 400,
@@ -24,7 +31,7 @@ export async function POST(req) {
 
     if (code === valid) {
       mfaStore.delete(username);
-      return new Response(JSON.stringify({ message: 'Successful!', token: valid }), {
+      return new Response(JSON.stringify({ message: 'Login Successful!', token: valid }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
       });

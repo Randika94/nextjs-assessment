@@ -56,13 +56,12 @@ export default function Login() {
     const handlePasswordSubmit = async (e) => {
         e.preventDefault();
         const username = localStorage.getItem('username');
-        const secureWord = '';
         const hashedPassword = CryptoJS.SHA256(password).toString();
     
         const res = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, secureWord, hashedPassword: hashedPassword })
+            body: JSON.stringify({ username: username, hashedPassword: hashedPassword, secureWord: secureWord })
         });
         const response = await res.json();
         if (res.ok) {
