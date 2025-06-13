@@ -27,7 +27,7 @@ export default function Dashboard() {
             <Navbar />
             <main className="py-4 flex justify-center">
             { isLoggedIn ? 
-                <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
+                <div className='overflow-x-auto shadow-md sm:rounded-lg'>
                     <table className="w-full text-sm text-left rtl:text-right">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-100">
                             <tr>
